@@ -7,13 +7,7 @@ const question = [
   `create a single object with relevant key value pair from the data, they key should not be more than two words inside the string and the value should be a string, not an object`,
 ];
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "1mb", 
-    },
-  },
-};
+
 export async function POST(
   req: Request,
 ) {
