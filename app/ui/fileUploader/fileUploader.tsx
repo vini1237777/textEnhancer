@@ -48,7 +48,7 @@ const FileUploader = () => {
     onDrop: (acceptedFiles) => fetchData(acceptedFiles, null),
     noClick: true,
     noKeyboard: true,
-    // accept: { "application/pdf": [".pdf"] },
+    accept: { "application/pdf": [".pdf"] },
   });
   return (
     <Box>

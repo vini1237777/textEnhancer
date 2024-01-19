@@ -7,7 +7,7 @@ export const dagDropContent: IContent = new Content(
   "Upload File"
 );
 export const pdfConversionContent: IContent = new Content(
-  "Your file has been converted and ready to be displayed. Click on reset to convert another file.",
+  "Your file has been converted and ready to be displayed. Click on reset button above to convert another file.",
   "",
   "Display Data"
 );
