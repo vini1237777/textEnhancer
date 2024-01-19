@@ -1,59 +1,76 @@
-"use client"
+"use client";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Button, Text, VStack, Box, Flex, IconButton, Spinner } from "@chakra-ui/react";
+import { Button, Text, Box, Flex, IconButton, Spinner } from "@chakra-ui/react";
 import { styles } from "./styles";
-import { dagDropContent, fileProcessingContent, pdfConversionContent } from "@/app/lib/constants";
+import {
+  dagDropContent,
+  fileProcessingContent,
+  pdfConversionContent,
+} from "@/app/lib/constants";
 import { rem } from "@/app/lib/functions";
 import Result from "../result/result";
 import SampleDocUploader from "../sampleDocUploader/sampleDocUploader";
 import { MdRefresh } from "react-icons/md";
 import Error from "../error/error";
 
+/**
+ * FileUploader is a React component for uploading files, processing them, and displaying results.
+ */
 const FileUploader = () => {
-
-  const [data, setData]= useState(null);
+  // State for managing the uploaded data, loading status, result display, and error status.
+  const [data, setData] = useState(null);
   const [loading, setIsLoading] = useState(false);
-  const [showResult, setShowResult]= useState(false);
+  const [showResult, setShowResult] = useState(false);
   const [isError, setIsError] = useState(false);
-  
-  const isdataAvailable= Object.values(data || {}).length > 0;
-  const fetchData = useCallback(async (acceptedFiles:File[], sampleFormData: FormData | null  ) => {
-    const formData = new FormData();
-     acceptedFiles && formData.append("file", acceptedFiles?.[0]) as unknown as  BodyInit
-    try {
-      setIsLoading(true);
-      setData(null);
-      const response = await fetch("/api/processPdf", {
-        method: "POST",
-        body: sampleFormData as BodyInit ||formData ,
-      });
 
-      if (!response.ok) {
-       setIsLoading(false);
-       setIsError(true);
-       return
+  // Check if data is available after processing
+  const isdataAvailable = Object.values(data || {}).length > 0;
+
+  // Function to fetch data, which processes the uploaded files.
+  const fetchData = useCallback(
+    async (acceptedFiles: File[], sampleFormData: FormData | null) => {
+      const formData = new FormData();
+      acceptedFiles && formData.append("file", acceptedFiles?.[0]);
+
+      try {
+        setIsLoading(true);
+        setData(null);
+        const response = await fetch("/api/processPdf", {
+          method: "POST",
+          body: sampleFormData || formData,
+        });
+
+        if (!response.ok) {
+          setIsLoading(false);
+          setIsError(true);
+          return;
+        }
+        const result = await response.json();
+        const parsedData = JSON.parse(result.data);
+        setData(parsedData);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        setIsError(true);
       }
-      const result = await response.json();
-      const parsedData= JSON.parse(result.data);
-      setData(parsedData);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-    }
-  }, []);
+    },
+    []
+  );
 
-
+  // useDropzone hook configuration for handling file drag-and-drop functionality.
   const { getRootProps, getInputProps, open } = useDropzone({
     onDrop: (acceptedFiles) => fetchData(acceptedFiles, null),
     noClick: true,
     noKeyboard: true,
     accept: { "application/pdf": [".pdf"] },
   });
+
   return (
     <Box>
       <Box sx={styles.wrapper}>
         <Box {...getRootProps()} sx={{ ...styles.container }}>
+          {/* Refresh icon to reset the data */}
           {data && (
             <IconButton
               display={{ base: "flex", md: "flex" }}
@@ -67,7 +84,9 @@ const FileUploader = () => {
               alignSelf="center"
             />
           )}
+          {/* Input field for file upload */}
           <input {...getInputProps()} data-testid="drop-input" />
+          {/* Displaying text based on the loading and data availability */}
           {!isError && (
             <Text
               sx={{
@@ -86,6 +105,7 @@ const FileUploader = () => {
               {isdataAvailable && pdfConversionContent.title}
             </Text>
           )}
+          {/* Error component when there is an error */}
           {isError && (
             <Error
               setError={() => {
@@ -93,8 +113,20 @@ const FileUploader = () => {
               }}
             />
           )}
+          {/* Loading spinner */}
           {!isError &&
-            (!loading ? (
+            (loading ? (
+              <Flex justifyContent={"center"} alignItems="center">
+                <Spinner
+                  size="xl"
+                  color="blue.500"
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="white"
+                  data-testid="loading-spinner"
+                />
+              </Flex>
+            ) : (
               <Text
                 sx={{
                   ...styles.text,
@@ -110,18 +142,8 @@ const FileUploader = () => {
               >
                 {!isdataAvailable && dagDropContent.description}
               </Text>
-            ) : (
-              <Flex justifyContent={"center"} alignItems="center">
-                <Spinner
-                  size="xl"
-                  color="blue.500"
-                  thickness="4px"
-                  speed="0.65s"
-                  emptyColor="white"
-                  data-testid="loading-spinner"
-                />
-              </Flex>
             ))}
+          {/* Buttons to upload files or display results */}
           {!isError &&
             (!loading && !isdataAvailable ? (
               <Button
@@ -139,14 +161,17 @@ const FileUploader = () => {
                     setShowResult(true);
                   }}
                   sx={{ ...styles.button }}
+                  data-testid="displayBtn"
                 >
                   {pdfConversionContent.buttonLabel}
                 </Button>
               )
             ))}
         </Box>
+        {/* Result component to display the processed data */}
         {showResult && isdataAvailable && <Result data={data || {}} />}
       </Box>
+      {/* Component for uploading sample documents */}
       {!loading && !isdataAvailable && (
         <SampleDocUploader fetchSampleFileData={fetchData} />
       )}

@@ -3,6 +3,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": "./",
+    "types": ["cypress"],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -26,3 +27,4 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/ui/fileUploader/fileUploader.test.js"],
   "exclude": ["node_modules"]
 }
+
