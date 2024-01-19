@@ -62,12 +62,12 @@ const FileUploader = () => {
               }}
               icon={<MdRefresh />}
               variant="outline"
-              aria-label="Open Sort"
+              aria-label="reset"
               color={"white"}
               alignSelf="center"
             />
           )}
-          <input {...getInputProps()} />
+          <input {...getInputProps()} data-testid="drop-input" />
           {!isError && (
             <Text
               sx={{
@@ -118,12 +118,17 @@ const FileUploader = () => {
                   thickness="4px"
                   speed="0.65s"
                   emptyColor="white"
+                  data-testid="loading-spinner"
                 />
               </Flex>
             ))}
           {!isError &&
             (!loading && !isdataAvailable ? (
-              <Button onClick={open} sx={{ ...styles.button }}>
+              <Button
+                onClick={open}
+                sx={{ ...styles.button }}
+                data-testid="uploadBtn"
+              >
                 {dagDropContent.buttonLabel}
               </Button>
             ) : (

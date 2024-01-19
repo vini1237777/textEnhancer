@@ -7,7 +7,7 @@ import { Box, Button, Text } from "@chakra-ui/react";
 
 export default function Error({ setError }: { setError: anyFunction }) {
   return (
-    <Box>
+    <Box data-testid='error'>
       <Text
         sx={{
           fontSize: {
@@ -22,7 +22,7 @@ export default function Error({ setError }: { setError: anyFunction }) {
       >
         {errorContent.title}
       </Text>
-      <Button onClick={() => setError()}>
+      <Button onClick={() => setError()} data-testid='try-again'>
         {errorContent.buttonLabel}
       </Button>
     </Box>
