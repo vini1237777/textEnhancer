@@ -24,8 +24,6 @@ export const styles = {
   },
   text: {
     ...commonStyles,
-    // pl: { base: rem(10) },
-    // pr: { base: rem(10) },
   },
   button: {
     alignSelf: "center",

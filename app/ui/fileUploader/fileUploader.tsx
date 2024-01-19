@@ -8,13 +8,14 @@ import { rem } from "@/app/lib/functions";
 import Result from "../result/result";
 import SampleDocUploader from "../sampleDocUploader/sampleDocUploader";
 import { MdRefresh } from "react-icons/md";
+import Error from "../error/error";
 
 const FileUploader = () => {
 
   const [data, setData]= useState(null);
   const [loading, setIsLoading] = useState(false);
   const [showResult, setShowResult]= useState(false);
-
+  const [isError, setIsError] = useState(false);
   const isdataAvailable= Object.values(data || {}).length > 0;
 
   
@@ -32,6 +33,7 @@ const FileUploader = () => {
 
       if (!response.ok) {
        setIsLoading(false);
+       setIsError(true);
        return
       }
       const result = await response.json();
@@ -43,39 +45,12 @@ const FileUploader = () => {
     }
   }, []);
 
-   const fetch123Data = useCallback(
-     async (acceptedFiles: File[], sampleFormData: FormData | null) => {
-       const formData = new FormData();
-       acceptedFiles &&
-         (formData.append("file", acceptedFiles?.[0]) as unknown as BodyInit);
-       try {
-         setIsLoading(true);
-         setData(null);
-         const response = await fetch("/api/processPdf", {
-           method: "POST",
-           body: (sampleFormData as BodyInit) || formData,
-         });
-
-         if (!response.ok) {
-           setIsLoading(false);
-           return;
-         }
-         const result = await response.json();
-         const parsedData = JSON.parse(result.data);
-         setData(parsedData);
-         setIsLoading(false);
-       } catch (error) {
-         setIsLoading(false);
-       }
-     },
-     []
-   );
-
 
   const { getRootProps, getInputProps, open } = useDropzone({
     onDrop: (acceptedFiles) => fetchData(acceptedFiles, null),
     noClick: true,
     noKeyboard: true,
+    accept: { "application/pdf": [".pdf"] },
   });
   return (
     <Box>
@@ -95,7 +70,7 @@ const FileUploader = () => {
             />
           )}
           <input {...getInputProps()} />
-          <Text
+          {!isError && <Text
             sx={{
               ...styles.text,
               fontSize: {
@@ -110,8 +85,9 @@ const FileUploader = () => {
               ? fileProcessingContent.title
               : !isdataAvailable && dagDropContent.title}
             {isdataAvailable && pdfConversionContent.title}
-          </Text>
-          {!loading ? (
+          </Text>}
+          {isError && <Error  setData={setData}/>}
+         { !isError && (!loading ? (
             <Text
               sx={{
                 ...styles.text,
@@ -137,8 +113,8 @@ const FileUploader = () => {
                 emptyColor="white"
               />
             </Flex>
-          )}
-          {(!loading && !isdataAvailable) ? (
+          ))}
+         {!isError && ((!loading && !isdataAvailable) ? (
             <Button onClick={open} sx={{ ...styles.button }}>
               {dagDropContent.buttonLabel}
             </Button>
@@ -151,11 +127,11 @@ const FileUploader = () => {
             >
               {pdfConversionContent.buttonLabel}
             </Button>
-          )}
+          ))}
         </Box>
         {showResult && isdataAvailable && <Result data={data || {}} />}
       </Box>
-      {!loading && !isdataAvailable &&(
+      {!loading && !isdataAvailable && (
         <SampleDocUploader fetchSampleFileData={fetchData} />
       )}
     </Box>

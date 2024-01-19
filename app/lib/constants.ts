@@ -35,3 +35,5 @@ export const loaderText: string ="Please wait for few seconds. Your document is 
 export const tableHeading: string = "Header";
 export const tableValue: string = "Value";
 export const navLOGOTitle: string = "Enhanced Text Extractor Tool";
+
+export const errorContent: IContent = new Content("Something went wrong!", "", "Try Again!");
