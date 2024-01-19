@@ -16,10 +16,8 @@ const FileUploader = () => {
   const [loading, setIsLoading] = useState(false);
   const [showResult, setShowResult]= useState(false);
   const [isError, setIsError] = useState(false);
-  const isdataAvailable= Object.values(data || {}).length > 0;
-
   
-
+  const isdataAvailable= Object.values(data || {}).length > 0;
   const fetchData = useCallback(async (acceptedFiles:File[], sampleFormData: FormData | null  ) => {
     const formData = new FormData();
      acceptedFiles && formData.append("file", acceptedFiles?.[0]) as unknown as  BodyInit
@@ -50,7 +48,7 @@ const FileUploader = () => {
     onDrop: (acceptedFiles) => fetchData(acceptedFiles, null),
     noClick: true,
     noKeyboard: true,
-    accept: { "application/pdf": [".pdf"] },
+    // accept: { "application/pdf": [".pdf"] },
   });
   return (
     <Box>
@@ -70,29 +68,10 @@ const FileUploader = () => {
             />
           )}
           <input {...getInputProps()} />
-          {!isError && <Text
-            sx={{
-              ...styles.text,
-              fontSize: {
-                base: rem(15),
-                sm: rem(20),
-                md: rem(20),
-                lg: rem(15),
-              },
-            }}
-          >
-            {loading
-              ? fileProcessingContent.title
-              : !isdataAvailable && dagDropContent.title}
-            {isdataAvailable && pdfConversionContent.title}
-          </Text>}
-          {isError && <Error  setData={setData}/>}
-         { !isError && (!loading ? (
+          {!isError && (
             <Text
               sx={{
                 ...styles.text,
-                color: "gray.300",
-                mb: rem(40),
                 fontSize: {
                   base: rem(15),
                   sm: rem(20),
@@ -101,33 +80,65 @@ const FileUploader = () => {
                 },
               }}
             >
-              {!isdataAvailable && dagDropContent.description}
+              {loading
+                ? fileProcessingContent.title
+                : !isdataAvailable && dagDropContent.title}
+              {isdataAvailable && pdfConversionContent.title}
             </Text>
-          ) : (
-            <Flex justifyContent={'center'} alignItems='center'>
-              <Spinner
-                size="xl"
-                color="blue.500"
-                thickness="4px"
-                speed="0.65s"
-                emptyColor="white"
-              />
-            </Flex>
-          ))}
-         {!isError && ((!loading && !isdataAvailable) ? (
-            <Button onClick={open} sx={{ ...styles.button }}>
-              {dagDropContent.buttonLabel}
-            </Button>
-          ) : (
-           isdataAvailable && !showResult && <Button
-              onClick={() => {
-                setShowResult(true);
+          )}
+          {isError && (
+            <Error
+              setError={() => {
+                setIsError(false);
               }}
-              sx={{ ...styles.button }}
-            >
-              {pdfConversionContent.buttonLabel}
-            </Button>
-          ))}
+            />
+          )}
+          {!isError &&
+            (!loading ? (
+              <Text
+                sx={{
+                  ...styles.text,
+                  color: "gray.300",
+                  mb: rem(40),
+                  fontSize: {
+                    base: rem(15),
+                    sm: rem(20),
+                    md: rem(20),
+                    lg: rem(15),
+                  },
+                }}
+              >
+                {!isdataAvailable && dagDropContent.description}
+              </Text>
+            ) : (
+              <Flex justifyContent={"center"} alignItems="center">
+                <Spinner
+                  size="xl"
+                  color="blue.500"
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="white"
+                />
+              </Flex>
+            ))}
+          {!isError &&
+            (!loading && !isdataAvailable ? (
+              <Button onClick={open} sx={{ ...styles.button }}>
+                {dagDropContent.buttonLabel}
+              </Button>
+            ) : (
+              isdataAvailable &&
+              !showResult && (
+                <Button
+                  onClick={() => {
+                    setShowResult(true);
+                  }}
+                  sx={{ ...styles.button }}
+                >
+                  {pdfConversionContent.buttonLabel}
+                </Button>
+              )
+            ))}
         </Box>
         {showResult && isdataAvailable && <Result data={data || {}} />}
       </Box>

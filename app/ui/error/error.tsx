@@ -5,15 +5,9 @@ import { rem } from "@/app/lib/functions";
 import { anyFunction } from "@/app/lib/types";
 import { Box, Button, Text } from "@chakra-ui/react";
 
-export default function Error({
-  // error,
-  setData,
-}: {
-  // error: Error & { digest?: string };
-  setData: anyFunction;
-}) {
+export default function Error({ setError }: { setError: anyFunction }) {
   return (
-    <Box >
+    <Box>
       <Text
         sx={{
           fontSize: {
@@ -22,13 +16,15 @@ export default function Error({
             md: rem(20),
             lg: rem(15),
           },
-          color:'white',
-          mb:rem(4)
+          color: "white",
+          mb: rem(4),
         }}
       >
         {errorContent.title}
       </Text>
-      <Button onClick={() => setData(null)}>{errorContent.buttonLabel}</Button>
+      <Button onClick={() => setError()}>
+        {errorContent.buttonLabel}
+      </Button>
     </Box>
   );
 }
