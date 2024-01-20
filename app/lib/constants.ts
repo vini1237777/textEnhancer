@@ -14,7 +14,7 @@ export const pdfConversionContent: IContent = new Content(
 
 export const toolDescriptionContent: IContent = new Content(
   ["Enhanced Text", "Extractor Tool"],
-  "Our deep learning data extraction technology immensely reduces manual errors and saves countless",
+  "Our deep learning data extraction technology immensely reduces manual errors and saves countless.",
   ""
 );
 
@@ -29,11 +29,15 @@ export const fileProcessingContent: IContent = new Content(
   "",
   ""
 );
+export const errorContent: IContent = new Content(
+  "Something went wrong!",
+   "", 
+   "Try Again!"
+);
 
 
 export const loaderText: string ="Please wait for few seconds. Your document is getting processed.";
 export const tableHeading: string = "Header";
 export const tableValue: string = "Value";
 export const navLOGOTitle: string = "Enhanced Text Extractor Tool";
-
-export const errorContent: IContent = new Content("Something went wrong!", "", "Try Again!");
+export const gptText: string = "POWERED By GPT";

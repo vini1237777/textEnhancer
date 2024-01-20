@@ -6,9 +6,12 @@ const commonStyles = {
 
 export const styles = {
   wrapper: {
-    p: { base: rem(10), sm: rem(20), md: rem(20) },
+    pt: { base: rem(10), sm: rem(20), md: '0'},
+    pb: { base: rem(10), sm: rem(20), md: rem(20) },
+    pl: { base: rem(10), sm: rem(20), md: rem(20) },
+    pr: { base: rem(10), sm: rem(20), md: rem(20) },
     bgColor: "#231c46",
-    mt: { base: rem(20), md:rem(20), lg:'0'},
+    mt: { base: rem(20), md: "0", lg: "0" },
   },
   container: {
     pt: rem(20),

@@ -22,8 +22,8 @@ const SampleDocUploader = ({fetchSampleFileData}:{fetchSampleFileData: anyFuncti
       </Text>
       <Button
         onClick={sampleDataFetching}
-        variant="outline"
         sx={{ ...styles.button }}
+        variant="outline"
         _hover={{color:'#180c2e', bgColor:'white'}}
       >
         {sampleDocContent.buttonLabel}

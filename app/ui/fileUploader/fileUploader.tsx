@@ -93,8 +93,8 @@ const FileUploader = () => {
                 ...styles.text,
                 fontSize: {
                   base: rem(15),
-                  sm: rem(20),
-                  md: rem(20),
+                  sm: rem(15),
+                  md: rem(16),
                   lg: rem(15),
                 },
               }}
@@ -134,8 +134,8 @@ const FileUploader = () => {
                   mb: rem(40),
                   fontSize: {
                     base: rem(15),
-                    sm: rem(20),
-                    md: rem(20),
+                    sm: rem(15),
+                    md: rem(16),
                     lg: rem(15),
                   },
                 }}
