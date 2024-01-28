@@ -49,15 +49,15 @@ export const featuresContent = [
     title: "Technology Stack",
     description: [
       {
-        heading:"Framework",
-        content:"NextJs, Typescript, Chakra UI"},
+        heading: "Framework",
+        content: "NextJs, Typescript, Chakra UI",
+      },
       {
         heading: "Integration",
         content: "Langchain and OpenAI (GPT-4)",
       },
     ],
   },
-
   {
     title: "PDF File Handling",
     description: [
@@ -81,32 +81,6 @@ export const featuresContent = [
       {
         heading: "Intelligent Parsing",
         content: "Transforms text into structured, meaningful data.",
-      },
-    ],
-  },
-  {
-    title: "Responsive UI with Chakra UI",
-    description: [
-      {
-        heading: "Interactive Components",
-        content: "Dynamic, user-friendly interface elements.",
-      },
-      {
-        heading: "Real-Time Updates",
-        content: "UI responsiveness with live data feed.",
-      },
-    ],
-  },
-  {
-    title: "Next.js Framework",
-    description: [
-      {
-        heading: "Optimized Rendering",
-        content: "Server-side rendering for performance gains.",
-      },
-      {
-        heading: "API Routes",
-        content: "Efficient backend data handling.",
       },
     ],
   },

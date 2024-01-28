@@ -6,13 +6,11 @@ export const styles = {
     display: "flex",
     backgroundColor: "#0c112e",
     justifyContent: "space-between",
-    position: "fixed",
     width: "100%",
     borderBottom: "4px solid #231c46",
-  },
-  wrapper: {
-    width: "100%",
-    backgroundColor: "#0c112e",
+    position: 'fixed',
+    top: 0,
+    zIndex: 4,
   },
   toolbar: {
     display: "flex",

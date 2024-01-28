@@ -19,7 +19,7 @@ export default function AppBar() {
   const handleMenuClose = () => setIsModalOpen(false);
 
   return (
-    <Box sx={{ ...styles.wrapper }}>
+    <>
       <Box padding="1rem" sx={{ ...styles.container }}>
         <Text alignSelf={"center"} sx={{ ...styles.text }}>
           TEXT EXTRACTOR
@@ -46,6 +46,6 @@ export default function AppBar() {
           handleMenuClose={handleMenuClose}
         />
       )}
-    </Box>
+    </>
   );
 }

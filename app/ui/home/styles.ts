@@ -5,15 +5,14 @@ export const styles = {
     bgColor: "#180c2e",
     display: "flex",
     flexDirection: "column",
-    height: "100vh",
-    maxHeight: "100vh"
+    position: 'relative'
   },
   description_uploader_wrapper: {
-    // pt: { base: rem(50), sm: rem(80), md: rem(90) },
-    position:'sticky',
-    top:40,
+    mt: { base: rem(120), sm: rem(130), md: rem(90) },
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    position: "relative",
+    zIndex:1,
   },
 };

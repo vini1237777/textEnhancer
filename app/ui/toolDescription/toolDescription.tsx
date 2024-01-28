@@ -25,7 +25,7 @@ const ToolDescription = () => {
                   fontSize: {
                     base: rem(20),
                     sm: rem(20),
-                    md: rem(30),
+                    md: rem(25),
                     lg: rem(30),
                   },
                   fontWeight: "bold",

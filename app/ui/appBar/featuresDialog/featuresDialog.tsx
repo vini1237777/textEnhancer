@@ -35,17 +35,19 @@ const FeaturesDialog = ({ isModalOpen, handleMenuClose }: IObject) => {
             flexWrap: "wrap",
           }}
         >
-          <Divider sx={{ width: { base: "90%", lg: "100%" } }} />
+          <Divider />
         </Box>
         <ModalCloseButton sx={{ ...styles.title }} />
         <ModalBody
           sx={{
             display: "flex",
-            justifyContent: "center",
-            gap: { base: rem(10), sm: rem(50), md: rem(100),lg:rem(30) },
+            alignItem: "center",
+            justifyContent: "flex-start",
+            gap: { base: "2rem", sm: "5rem", md: "3rem" },
             flexWrap: "wrap",
-            padding: rem(30),
+            pl: { base: rem(40) },
           }}
+          alignContent="center"
         >
           {featuresContent.map((feature, index) => (
             <Box
@@ -56,8 +58,11 @@ const FeaturesDialog = ({ isModalOpen, handleMenuClose }: IObject) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-                width: { base: "100%",sm:'40%', md: "30%", lg: "45%" },
-                height: "50%",
+                width: { base: "100%", sm: "35%", md: "28%", lg: "45%" },
+                transition: "transform 0.3s",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                },
               }}
             >
               <Text fontSize="lg" fontWeight="bold" sx={{ ...styles.title }}>

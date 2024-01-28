@@ -8,10 +8,10 @@ export const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    pt: { md: rem(20) },
+    pt: { md: rem(2) },
     pb: { md: rem(70) },
     alignItems: "center",
-    gap: "4",
+    gap: "2",
     mt: { base: rem(10) },
     bgColor: "#180c2e"
   },

@@ -12,8 +12,14 @@ export const styles = {
   tableWrapper: {
     alignItems: "center",
   },
-  divider: {
+  text: {
     borderRight: "1px solid",
     borderColor: "gray.300",
+    fontSize: {
+      base: rem(15),
+      sm: rem(15),
+      md: rem(16),
+      lg: rem(15),
+    },
   },
 };

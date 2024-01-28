@@ -18,10 +18,10 @@ const Result = ({data={}}) => {
 
  
   return (
-    <TableContainer sx={{ ...styles.container }} data-testid='data-table'>
+    <TableContainer sx={{ ...styles.container }} data-testid="data-table">
       <Table variant="simple">
         <Thead sx={{ ...styles.tableWrapper }}>
-          <Tr sx={{ ...styles.divider }}>
+          <Tr sx={{ ...styles.text }}>
             <Th color={"white"}>Header</Th>
             <Th color={"white"}>Value</Th>
           </Tr>
@@ -29,8 +29,8 @@ const Result = ({data={}}) => {
         <Tbody>
           {headers.map((header: string, index: number) => (
             <Tr key={header}>
-              <Td sx={{ ...styles.divider }}>{header}</Td>
-              <Td>{values[index]}</Td>{" "}
+              <Td sx={{ ...styles.text }}>{header}</Td>
+              <Td sx={{ ...styles.text }}>{values[index]}</Td>{" "}
             </Tr>
           ))}
         </Tbody>
