@@ -41,3 +41,91 @@ export const tableHeading: string = "Header";
 export const tableValue: string = "Value";
 export const navLOGOTitle: string = "Enhanced Text Extractor Tool";
 export const gptText: string = "POWERED By GPT";
+
+
+
+export const featuresContent = [
+  {
+    title: "Technology Stack",
+    description: [
+      {
+        heading:"Framework",
+        content:"NextJs, Typescript, Chakra UI"},
+      {
+        heading: "Integration",
+        content: "Langchain and OpenAI (GPT-4)",
+      },
+    ],
+  },
+
+  {
+    title: "PDF File Handling",
+    description: [
+      {
+        heading: "Efficient Upload",
+        content: "Streamlined PDF upload and buffer management.",
+      },
+      {
+        heading: "Content Extraction",
+        content: "Accurate text extraction from PDFs.",
+      },
+    ],
+  },
+  {
+    title: "AI-Powered Data Processing",
+    description: [
+      {
+        heading: "GPT-4 Integration",
+        content: "Leverages OpenAI's GPT-4 for data analysis.",
+      },
+      {
+        heading: "Intelligent Parsing",
+        content: "Transforms text into structured, meaningful data.",
+      },
+    ],
+  },
+  {
+    title: "Responsive UI with Chakra UI",
+    description: [
+      {
+        heading: "Interactive Components",
+        content: "Dynamic, user-friendly interface elements.",
+      },
+      {
+        heading: "Real-Time Updates",
+        content: "UI responsiveness with live data feed.",
+      },
+    ],
+  },
+  {
+    title: "Next.js Framework",
+    description: [
+      {
+        heading: "Optimized Rendering",
+        content: "Server-side rendering for performance gains.",
+      },
+      {
+        heading: "API Routes",
+        content: "Efficient backend data handling.",
+      },
+    ],
+  },
+  {
+    title: "Comprehensive Testing",
+    description: [
+      {
+        heading: "Cypress E2E",
+        content: "End-to-end testing for workflow validation.",
+      },
+      {
+        heading: "Jest & React Testing",
+        content: "unit/integration testing.",
+      },
+    ],
+  },
+];
+
+
+export const dialogTitle = "FEATURES";
+
+export const githubLink = "https://github.com/vini1237777/textEnhancer";

@@ -1,6 +1,5 @@
 'use client'
 
-import React, { useState } from "react";
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { sampleDocContent } from "@/app/lib/constants";
 import { styles } from "./styles";

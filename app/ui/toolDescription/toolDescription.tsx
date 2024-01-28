@@ -13,8 +13,7 @@ const ToolDescription = () => {
     >
       <Flex
         sx={{
-          flexDirection: { base: "column", sm: "row", md: "row" },
-          gap: { sm: 2,base:1, md: 3 },
+          gap: { sm: 1,base:1, md: 3 },
         }}
       >
         {Array.isArray(toolDescriptionContent.title) &&

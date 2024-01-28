@@ -5,8 +5,12 @@ const commonStyles = {
 }
 
 export const styles = {
+  rootWrapper: {
+    pl: { base: rem(50), sm: rem(80), md: rem(120) },
+    pr: { base: rem(50), sm: rem(80), md: rem(120) },
+  },
   wrapper: {
-    pt: { base: rem(10), sm: rem(20), md: '0'},
+    pt: { base: rem(10), sm: rem(20), md: "0" },
     pb: { base: rem(10), sm: rem(20), md: rem(20) },
     pl: { base: rem(10), sm: rem(20), md: rem(20) },
     pr: { base: rem(10), sm: rem(20), md: rem(20) },

@@ -67,7 +67,7 @@ const FileUploader = () => {
   });
 
   return (
-    <Box>
+    <Box sx={styles.rootWrapper}>
       <Box sx={styles.wrapper}>
         <Box {...getRootProps()} sx={{ ...styles.container }}>
           {/* Refresh icon to reset the data */}
