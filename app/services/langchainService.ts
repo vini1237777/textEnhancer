@@ -28,7 +28,7 @@ async function extractInformation(
 
   
   try {
-    const timeoutDuration = 99000; // Timeout duration in milliseconds (e.g., 5000ms = 5s)
+    const timeoutDuration = 9900; // Timeout duration in milliseconds (e.g., 5000ms = 5s)
 
     const chainCallPromise = chain.call({
       input_documents: [new Document({ pageContent: docs })],
