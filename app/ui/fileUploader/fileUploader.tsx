@@ -13,7 +13,6 @@ import {
 import { styles } from "./styles";
 import {
   dagDropContent,
-  errorContent,
   fileProcessingContent,
   pdfConversionContent,
 } from "@/app/lib/constants";
@@ -71,9 +70,7 @@ const FileUploader = () => {
                method: "POST",
                body: sampleFormData || formData,
              });
-             if (!res?.ok) {
-              setError(errorContent?.title as string);
-             }
+             
              const response = await res.json();
              if (response?.error) {
                setIsLoading(false);
