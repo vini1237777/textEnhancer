@@ -40,7 +40,6 @@ const FileUploader = () => {
   // Function to fetch data, which processes the uploaded files.
   const fetchData = useCallback(
     async (acceptedFiles: any[] ,sampleFormData: null | FormData ) => {
-      const formData = new FormData();
        acceptedFiles && acceptedFiles?.some(async (rejection:IObject) =>{
         if (rejection &&rejection.errors && rejection.errors.length) {
           rejection.errors.some(
@@ -62,6 +61,8 @@ const FileUploader = () => {
         const acceptedFilesError = acceptedFiles && acceptedFiles[0] && acceptedFiles[0].errors && acceptedFiles[0].errors.length > 0
 
          if (!acceptedFilesError || sampleFormData) {
+            setIsLoading(true)
+           const formData = new FormData();
            formData.append("file", acceptedFiles?.[0]);
            try {
              setIsLoading(true);
@@ -70,7 +71,6 @@ const FileUploader = () => {
                method: "POST",
                body: sampleFormData || formData,
              });
-             
              const response = await res.json();
              if (response?.error) {
                setIsLoading(false);
@@ -145,7 +145,6 @@ const FileUploader = () => {
             <Error
               setError={() => {
                 setError('');
-                setIsLoading(false)
               }}
               error={error}
             />
