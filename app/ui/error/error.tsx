@@ -6,7 +6,6 @@ import { anyFunction } from "@/app/lib/types";
 import { Box, Button, Text } from "@chakra-ui/react";
 
 export default function Error({ setError, error }: { setError: anyFunction, error:string }) {
-  console.log(error,'error')
   return (
     <Box data-testid='error'>
       <Text

@@ -16,7 +16,11 @@ function timeout(ms: number) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       // Creating an error object with an 'error' property
-      reject(new Error("Request timed out"));
+      reject(
+        new Error(
+          "The request timed out due to Vercel's free tier limitations. Please upload a less complex file for processing or use the provided sample PDF"
+        )
+      );
     }, ms);
   });
 }
@@ -28,7 +32,7 @@ async function extractInformation(
 
   
   try {
-    const timeoutDuration = 9000; // Timeout duration in milliseconds (e.g., 5000ms = 5s)
+    const timeoutDuration = 1000; // Timeout duration in milliseconds (e.g., 5000ms = 5s)
 
     const chainCallPromise = chain.call({
       input_documents: [new Document({ pageContent: docs })],
