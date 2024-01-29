@@ -145,6 +145,7 @@ const FileUploader = () => {
             <Error
               setError={() => {
                 setError('');
+                setIsLoading(false)
               }}
               error={error}
             />
