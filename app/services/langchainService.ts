@@ -8,7 +8,7 @@ import { IObject } from "../lib/types";
 
 const llm = new OpenAI({
   modelName: "gpt-4",
-  temperature: 0.9,
+  temperature: 0.5,
   openAIApiKey: process.env.OPENAI_API_KEY,
 });
 const chain = loadQAStuffChain(llm);

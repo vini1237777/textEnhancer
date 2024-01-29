@@ -11,12 +11,12 @@ export default function Error({ setError, error }: { setError: anyFunction, erro
     <Box data-testid='error'>
       <Text
         sx={{
-          fontSize: {
+          fontSize:{ 
             base: rem(15),
-            sm: rem(20),
-            md: rem(20),
-            lg: rem(15),
-          },
+            sm: rem(15),
+            md: rem(16),
+            lg: rem(15)
+           },
           color: "white",
           mb: rem(10),
         }}
