@@ -64,6 +64,7 @@ const FileUploader = () => {
            const formData = new FormData();
            formData.append("file", acceptedFiles?.[0]);
            try {
+             setError("");
              setIsLoading(true);
              setData(null);
              const res = await fetch("/api/processPdf", {
