@@ -10,20 +10,17 @@ const llm = new OpenAI({
 });
 const chain = loadQAStuffChain(llm);
 
-async function extractInformation(docs: string, questions: string[]) {
-  const chunkSize = 3000; 
-  let responseText = "";
+async function extractInformation(
+  docs:  string,
+  questions: string[]
+) {
 
-  for (let i = 0; i < docs.length; i += chunkSize) {
-    const chunk = docs.substring(i, Math.min(i + chunkSize, docs.length));
     const response = await chain.call({
-      input_documents: [new Document({ pageContent: chunk })],
-      question: questions[0],
-    });
-    responseText += response.text.trim();
-  }
+          input_documents: [new Document({ pageContent: docs })],
+          question: questions[0],
+        })
 
-  return responseText;
+  return response.text.trim();
 }
 
 export default extractInformation;
