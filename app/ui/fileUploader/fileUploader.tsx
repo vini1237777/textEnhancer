@@ -13,7 +13,6 @@ import {
 import { styles } from "./styles";
 import {
   dagDropContent,
-  errorContent,
   fileProcessingContent,
   pdfConversionContent,
 } from "@/app/lib/constants";
@@ -22,7 +21,7 @@ import Result from "../result/result";
 import SampleDocUploader from "../sampleDocUploader/sampleDocUploader";
 import { MdRefresh } from "react-icons/md";
 import Error from "../error/error";
-import { IContent, IObject } from "@/app/lib/types";
+import {  IObject } from "@/app/lib/types";
 
 /**
  * FileUploader is a React component for uploading files, processing them, and displaying results.
@@ -74,7 +73,7 @@ const FileUploader = () => {
              const response = await res.json();
              if (response?.error) {
                setIsLoading(false);
-               setError(response.error || errorContent.title);
+               setError(response.error);
                return;
              }
              setData(response?.data);
@@ -99,6 +98,8 @@ const FileUploader = () => {
     maxSize: 250 * 1024,
     accept: { "application/pdf": [".pdf"] },
   });
+
+  console.log({error})
 
   return (
     < >

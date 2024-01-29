@@ -2,7 +2,7 @@
 
 import { errorContent } from "@/app/lib/constants";
 import { rem } from "@/app/lib/functions";
-import { anyFunction, IContent } from "@/app/lib/types";
+import { anyFunction } from "@/app/lib/types";
 import { Box, Button, Text } from "@chakra-ui/react";
 
 export default function Error({ setError, error }: { setError: anyFunction, error:string }) {
@@ -20,7 +20,7 @@ export default function Error({ setError, error }: { setError: anyFunction, erro
           mb: rem(10),
         }}
       >
-        {error || errorContent.title}
+        {error}
       </Text>
       <Button onClick={() => setError()} data-testid='try-again'>
         {errorContent.buttonLabel}
