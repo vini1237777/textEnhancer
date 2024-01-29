@@ -6,7 +6,7 @@ export interface IObject {
 export type anyFunction = (...args: any[]) => any;
 
 export interface IContent {
-    title: string | string[];
-    description: string;
-    buttonLabel: string;
+    title?: string | string[];
+    description?: string;
+    buttonLabel?: string;
 } 
