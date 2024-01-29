@@ -2,7 +2,6 @@ import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import extractInformation from "@/app/services/langchainService";
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
-import { IObject } from "@/app/lib/types";
 
 const question = [
   "Create a single object with relevant key-value pairs from the data. The key should be concise, not more than two words with space between them, and enclosed in double quotes. The value should be a brief string. Prioritize general information like name, contact, etc. Please provide a summarized response that fits within 8000 tokens to avoid errors related to maximum context length limits.",
