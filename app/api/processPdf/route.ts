@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 
 const question = [
-  "Create a single object with relevant key-value pairs from the data. The key should be concise, not more than two words with space between them, and enclosed in double quotes. The value should be a brief string. Prioritize general information like name, contact, etc. Please provide a summarized response that fits within 8000 tokens to avoid errors related to maximum context length limits.",
+  "Create a single object with relevant key-value pairs from the data. The key should be concise, not more than two words with space between them, and enclosed in double quotes. The value should be a brief string."
 ];
 
 export async function POST(
