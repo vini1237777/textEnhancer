@@ -74,7 +74,6 @@ const FileUploader = () => {
              if (response?.error) {
                setIsLoading(false);
                setError(response.error);
-               return;
              }
              setData(response?.data);
              setError('');
@@ -202,7 +201,7 @@ const FileUploader = () => {
       </Box>
       {/* Component for uploading sample documents */}
       {!loading && !isdataAvailable && (
-        <SampleDocUploader fetchSampleFileData={fetchData} setIsLoading={setIsLoading}/>
+        <SampleDocUploader fetchSampleFileData={fetchData} />
       )}
     </>
   );
