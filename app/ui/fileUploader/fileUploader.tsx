@@ -96,7 +96,7 @@ const FileUploader = () => {
       fetchData(acceptedFiles.length > 0 ? acceptedFiles: fileRejections, null),
     noClick: true,
     noKeyboard: true,
-    // maxSize: 250 * 1024,
+    maxSize: 250 * 1024,
     accept: { "application/pdf": [".pdf"] },
   });
 

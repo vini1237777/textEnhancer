@@ -10,7 +10,7 @@ const commonStyles = {
 
 export const styles = {
   wrapper: {
-    pt: { base: 0, sm: rem(20), md: "0" },
+    pt: { base: '0', sm: rem(10), md: "0" },
     pb: { base: rem(10), sm: rem(20), md: rem(20) },
     mt: { base: rem(20), md: "0", lg: "0" },
   },

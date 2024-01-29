@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 
 const question = [
-  `create a single object with relevant key value pair from the data, they key should not be more than two words and should have space between them inside the double quotes string and the value should be a string, not an object. Also keep general information like name, contact etc first. Result should not exceed 8000 tokens to avoid errors like: "400 This model's maximum context length is 8192 tokens. However, your messages resulted in 9405 tokens. Please reduce the length of the messages." `,
+  "Create a single object with relevant key-value pairs from the data. The key should be concise, not more than two words with space between them, and enclosed in double quotes. The value should be a brief string. Prioritize general information like name, contact, etc. Please provide a summarized response that fits within 8000 tokens to avoid errors related to maximum context length limits.",
 ];
 
 export async function POST(
