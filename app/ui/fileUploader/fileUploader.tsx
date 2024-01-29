@@ -39,51 +39,62 @@ const FileUploader = () => {
 
   // Function to fetch data, which processes the uploaded files.
   const fetchData = useCallback(
-    async (acceptedFiles: File[],fileRejections: any[], sampleFormData: FormData | null) => {
+    async (acceptedFiles: any[] ,sampleFormData: null | FormData ) => {
       const formData = new FormData();
-      acceptedFiles && formData.append("file", acceptedFiles?.[0]);
-       const isFileTooLarge = fileRejections.some((rejection) =>
-         rejection.errors.some((error: IObject) => error.code === "file-too-large")
-       );
-       if (isFileTooLarge) {
-         toast({
-           title: "File size limit exceeded",
-           description: "File is too large. Maximum size is 250KB.",
-           status: "error",
-           duration: 9000,
-           isClosable: true,
-         });
-         return;
-       }
-      try {
-        setIsLoading(true);
-        setData(null);
-        const response = await fetch("/api/processPdf", {
-          method: "POST",
-          body: sampleFormData || formData,
-        });
-
-        if (!response.ok) {
-          setIsLoading(false);
-          setIsError(true);
+       acceptedFiles && acceptedFiles?.some(async (rejection:IObject) =>{
+        if (rejection &&rejection.errors && rejection.errors.length) {
+          rejection.errors.some(
+            (error: IObject) => error.code === "file-too-large"
+          );
+          toast({
+            title: "File size limit exceeded",
+            description: "File is too large. Maximum size is 250KB.",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return;
-        }
-        const result = await response.json();
-        console.log(result.data);
-        setData(result.data);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        setIsError(true);
+        } 
+       
       }
+        );
+        console.log({acceptedFiles})
+        
+        const acceptedFilesError = acceptedFiles && acceptedFiles[0] && acceptedFiles[0].errors && acceptedFiles[0].errors.length > 0
+
+         if (!acceptedFilesError || sampleFormData) {
+           formData.append("file", acceptedFiles?.[0]);
+           try {
+             setIsLoading(true);
+             setData(null);
+             const response = await fetch("/api/processPdf", {
+               method: "POST",
+               body: sampleFormData || formData,
+             });
+
+             if (!response.ok) {
+               setIsLoading(false);
+               setIsError(true);
+               return;
+             }
+             const result = await response.json();
+             console.log(result.data);
+             setData(result.data);
+             setIsLoading(false);
+           } catch (error) {
+             setIsLoading(false);
+             setIsError(true);
+           }
+         }
+     
     },
     []
   );
 
   // useDropzone hook configuration for handling file drag-and-drop functionality.
   const { getRootProps, getInputProps, open } = useDropzone({
-    onDrop: (acceptedFiles, fileRejections) =>
-      fetchData(acceptedFiles,fileRejections, null),
+    onDrop: (acceptedFiles: File[], fileRejections: any[] = []) =>
+      fetchData(acceptedFiles.length > 0 ? acceptedFiles: fileRejections, null),
     noClick: true,
     noKeyboard: true,
     maxSize: 250 * 1024,
