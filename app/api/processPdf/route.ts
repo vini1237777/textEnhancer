@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 
 const question = [
-  `create a single object with relevant key value pair from the data, they key should not be more than two words and should have space between them inside the double quotes string and the value should be a string, not an object. Also keep general information like name, contact etc first`,
+  `create a single object with relevant key value pair from the data, they key should not be more than two words and should have space between them inside the double quotes string and the value should be a string, not an object. Also keep general information like name, contact etc first. Result should not exceed 29,000 words including spaces`,
 ];
 
 export async function POST(

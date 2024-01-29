@@ -13,6 +13,7 @@ import {
 import { styles } from "./styles";
 import {
   dagDropContent,
+  errorContent,
   fileProcessingContent,
   pdfConversionContent,
 } from "@/app/lib/constants";
@@ -21,7 +22,7 @@ import Result from "../result/result";
 import SampleDocUploader from "../sampleDocUploader/sampleDocUploader";
 import { MdRefresh } from "react-icons/md";
 import Error from "../error/error";
-import { IObject } from "@/app/lib/types";
+import { IContent, IObject } from "@/app/lib/types";
 
 /**
  * FileUploader is a React component for uploading files, processing them, and displaying results.
@@ -31,7 +32,7 @@ const FileUploader = () => {
   const [data, setData] = useState(null);
   const [loading, setIsLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState<string | IContent>('');
   const toast = useToast();
 
   // Check if data is available after processing
@@ -73,7 +74,7 @@ const FileUploader = () => {
 
              if (!response.ok) {
                setIsLoading(false);
-               setIsError(true);
+               setError(errorContent);
                return;
              }
              const result = await response.json();
@@ -81,7 +82,7 @@ const FileUploader = () => {
              setIsLoading(false);
            } catch (error) {
              setIsLoading(false);
-             setIsError(true);
+             setError(error as string);
            }
          }
      
@@ -120,7 +121,7 @@ const FileUploader = () => {
           {/* Input field for file upload */}
           <input {...getInputProps()} data-testid="drop-input" />
           {/* Displaying text based on the loading and data availability */}
-          {!isError && (
+          {!error && (
             <Text
               sx={{
                 ...styles.text,
@@ -139,15 +140,15 @@ const FileUploader = () => {
             </Text>
           )}
           {/* Error component when there is an error */}
-          {isError && (
+          {error && (
             <Error
               setError={() => {
-                setIsError(false);
+                setError('');
               }}
             />
           )}
           {/* Loading spinner */}
-          {!isError &&
+          {!error &&
             (loading ? (
               <Flex justifyContent={"center"} alignItems="center">
                 <Spinner
@@ -171,7 +172,7 @@ const FileUploader = () => {
               </Text>
             ))}
           {/* Buttons to upload files or display results */}
-          {!isError &&
+          {!error &&
             (!loading && !isdataAvailable ? (
               <Button
                 onClick={open}
@@ -199,7 +200,7 @@ const FileUploader = () => {
         {showResult && isdataAvailable && <Result data={data || {}} />}
       </Box>
       {/* Component for uploading sample documents */}
-      {!loading && !isError && !isdataAvailable && (
+      {!loading && !error && !isdataAvailable && (
         <SampleDocUploader fetchSampleFileData={fetchData} />
       )}
     </>
