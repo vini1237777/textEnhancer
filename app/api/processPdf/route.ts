@@ -53,6 +53,7 @@ export async function POST(
          );
         
       } catch (error: any) {
+        console.log(error,'err');
         return NextResponse.json({ error: error?.error?.message || error?.message || "Something Went Wrong!" , code: error?.error?.code }, { status: 500 });
       }
 }
