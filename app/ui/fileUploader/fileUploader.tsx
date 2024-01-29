@@ -58,7 +58,6 @@ const FileUploader = () => {
        
       }
         );
-        console.log({acceptedFiles})
         
         const acceptedFilesError = acceptedFiles && acceptedFiles[0] && acceptedFiles[0].errors && acceptedFiles[0].errors.length > 0
 
@@ -78,7 +77,6 @@ const FileUploader = () => {
                return;
              }
              const result = await response.json();
-             console.log(result.data);
              setData(result.data);
              setIsLoading(false);
            } catch (error) {

@@ -7,7 +7,6 @@ const question = [
   `create a single object with relevant key value pair from the data, they key should not be more than two words and should have space between them inside the double quotes string and the value should be a string, not an object. Also keep general information like name, contact etc first`,
 ];
 
-
 export async function POST(
   req: Request,
 ) {
@@ -30,8 +29,9 @@ export async function POST(
         const questions: string[] = [...question]; 
         const extractedInfo = await extractInformation(fullText, questions);
         const jsonPart = extractedInfo &&  extractedInfo.match(/{[^]*?}/g); 
+        const parsedJson= JSON.parse(extractedInfo);
         return NextResponse.json(
-          { data: jsonPart && extractedInfo || {} },
+          { data: (jsonPart && parsedJson) || {} },
           { status: 200 }
         );
       } catch (error: any) {
