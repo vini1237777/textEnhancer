@@ -41,7 +41,8 @@ async function extractInformation(
     ]);
     return result;
 
-  } catch (error) {
+  } 
+  catch (error) {
     throw error;
   }
 

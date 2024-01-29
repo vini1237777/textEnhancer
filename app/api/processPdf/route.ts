@@ -33,17 +33,17 @@ export async function POST(
         ) as {text: string};
         if (extractedInfo) {
            if (extractedInfo?.text){
-
+            const textString = extractedInfo?.text || "";
+            const jsonPart = textString?.trim()?.match(/{[^]*?}/g) || "{}";
+            const parsedJson = JSON.parse(jsonPart as string);
+            return NextResponse.json(
+              {
+                data: parsedJson || {},
+              },
+              { status: 200 }
+            );
            }
-          const textString = extractedInfo?.text || ''
-          const jsonPart = textString?.trim()?.match(/{[^]*?}/g) || "{}";
-          const parsedJson = JSON.parse(jsonPart as string);
-          return NextResponse.json(
-            {
-              data: parsedJson || {},
-            },
-            { status: 200 }
-          );
+          
         }
          return NextResponse.json(
            {
