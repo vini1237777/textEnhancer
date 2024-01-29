@@ -8,8 +8,8 @@ export const styles = {
     color: "white",
     mt: rem(70),
     bgColor: "#0c112e",
-    ml: rem(20),
-    mr: rem(20),
+    ml: { base: rem(20), sm: rem(80), md: rem(120) },
+    mr: { base: rem(20), sm: rem(80), md: rem(120) },
   },
   tableWrapper: {
     alignItems: "center",

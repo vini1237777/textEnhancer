@@ -29,8 +29,8 @@ const Result = ({data={}}) => {
         <Tbody>
           {headers.map((header: string, index: number) => (
             <Tr key={header}>
-              <Td sx={{ ...styles.text }}>{header}</Td>
-              <Td sx={{ ...styles.text }}>{values[index]}</Td>{" "}
+              <Td sx={{ ...styles.text }}>{header.toLocaleUpperCase()}</Td>
+              <Td sx={{ ...styles.text }}>{values[index]}</Td>
             </Tr>
           ))}
         </Tbody>

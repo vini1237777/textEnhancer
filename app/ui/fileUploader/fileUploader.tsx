@@ -1,7 +1,15 @@
 "use client";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Button, Text, Box, Flex, IconButton, Spinner } from "@chakra-ui/react";
+import {
+  Button,
+  Text,
+  Box,
+  Flex,
+  IconButton,
+  Spinner,
+  useToast,
+} from "@chakra-ui/react";
 import { styles } from "./styles";
 import {
   dagDropContent,
@@ -13,6 +21,7 @@ import Result from "../result/result";
 import SampleDocUploader from "../sampleDocUploader/sampleDocUploader";
 import { MdRefresh } from "react-icons/md";
 import Error from "../error/error";
+import { IObject } from "@/app/lib/types";
 
 /**
  * FileUploader is a React component for uploading files, processing them, and displaying results.
@@ -23,16 +32,29 @@ const FileUploader = () => {
   const [loading, setIsLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [isError, setIsError] = useState(false);
+  const toast = useToast();
 
   // Check if data is available after processing
   const isdataAvailable = Object.values(data || {}).length > 0;
 
   // Function to fetch data, which processes the uploaded files.
   const fetchData = useCallback(
-    async (acceptedFiles: File[], sampleFormData: FormData | null) => {
+    async (acceptedFiles: File[],fileRejections: any[], sampleFormData: FormData | null) => {
       const formData = new FormData();
       acceptedFiles && formData.append("file", acceptedFiles?.[0]);
-
+       const isFileTooLarge = fileRejections.some((rejection) =>
+         rejection.errors.some((error: IObject) => error.code === "file-too-large")
+       );
+       if (isFileTooLarge) {
+         toast({
+           title: "File size limit exceeded",
+           description: "File is too large. Maximum size is 250KB.",
+           status: "error",
+           duration: 9000,
+           isClosable: true,
+         });
+         return;
+       }
       try {
         setIsLoading(true);
         setData(null);
@@ -47,8 +69,8 @@ const FileUploader = () => {
           return;
         }
         const result = await response.json();
-        const parsedData = JSON.parse(result.data);
-        setData(parsedData);
+        console.log(result.data);
+        setData(result.data);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -60,9 +82,11 @@ const FileUploader = () => {
 
   // useDropzone hook configuration for handling file drag-and-drop functionality.
   const { getRootProps, getInputProps, open } = useDropzone({
-    onDrop: (acceptedFiles) => fetchData(acceptedFiles, null),
+    onDrop: (acceptedFiles, fileRejections) =>
+      fetchData(acceptedFiles,fileRejections, null),
     noClick: true,
     noKeyboard: true,
+    maxSize: 250 * 1024,
     accept: { "application/pdf": [".pdf"] },
   });
 
