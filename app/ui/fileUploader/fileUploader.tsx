@@ -202,7 +202,7 @@ const FileUploader = () => {
       </Box>
       {/* Component for uploading sample documents */}
       {!loading && !isdataAvailable && (
-        <SampleDocUploader fetchSampleFileData={fetchData} />
+        <SampleDocUploader fetchSampleFileData={fetchData} setIsLoading={setIsLoading}/>
       )}
     </>
   );

@@ -5,13 +5,20 @@ import { sampleDocContent } from "@/app/lib/constants";
 import { styles } from "./styles";
 import { anyFunction } from "@/app/lib/types";
 
-const SampleDocUploader = ({fetchSampleFileData}:{fetchSampleFileData: anyFunction}) => {
+const SampleDocUploader = ({
+  fetchSampleFileData,
+  setIsLoading,
+}: {
+  fetchSampleFileData: anyFunction;
+  setIsLoading:anyFunction;
+}) => {
   const sampleDataFetching = async () => {
-      const responseFile = await fetch("/sample/sample.pdf");
-      const blob = await responseFile.blob();
-      const formData = new FormData();
-      formData.append("file", blob, "sample.pdf");
-       fetchSampleFileData(null, formData);
+    setIsLoading(true);
+    const responseFile = await fetch("/sample/sample.pdf");
+    const blob = await responseFile.blob();
+    const formData = new FormData();
+    formData.append("file", blob, "sample.pdf");
+    fetchSampleFileData(null, formData);
   };
 
   return (
@@ -23,7 +30,7 @@ const SampleDocUploader = ({fetchSampleFileData}:{fetchSampleFileData: anyFuncti
         onClick={sampleDataFetching}
         sx={{ ...styles.button }}
         variant="outline"
-        _hover={{color:'#180c2e', bgColor:'white'}}
+        _hover={{ color: "#180c2e", bgColor: "white" }}
       >
         {sampleDocContent.buttonLabel}
       </Button>
