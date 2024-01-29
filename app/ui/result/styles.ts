@@ -9,7 +9,7 @@ export const styles = {
     mt: rem(70),
     bgColor: "#0c112e",
     ml: rem(20),
-    mr: rem(10),
+    mr: rem(20),
   },
   tableWrapper: {
     alignItems: "center",
