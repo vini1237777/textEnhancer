@@ -21,7 +21,7 @@ export default function Error({ setError, error }: { setError: anyFunction, erro
           mb: rem(10),
         }}
       >
-        {typeof error === "string" ? error : error}
+        {error}
       </Text>
       <Button onClick={() => setError()} data-testid='try-again'>
         {errorContent.buttonLabel}
