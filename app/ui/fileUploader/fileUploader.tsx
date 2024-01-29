@@ -99,7 +99,6 @@ const FileUploader = () => {
     accept: { "application/pdf": [".pdf"] },
   });
 
-  console.log({error})
 
   return (
     < >
