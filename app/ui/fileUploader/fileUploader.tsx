@@ -202,7 +202,7 @@ const FileUploader = () => {
         {showResult && isdataAvailable && <Result data={data || {}} />}
       </Box>
       {/* Component for uploading sample documents */}
-      {!loading && !isdataAvailable && (
+      {!loading && !isdataAvailable && error && (
         <SampleDocUploader fetchSampleFileData={fetchData} />
       )}
     </>
