@@ -61,7 +61,6 @@ const FileUploader = () => {
         const acceptedFilesError = acceptedFiles && acceptedFiles[0] && acceptedFiles[0].errors && acceptedFiles[0].errors.length > 0
 
          if (!acceptedFilesError || sampleFormData) {
-            setIsLoading(true)
            const formData = new FormData();
            formData.append("file", acceptedFiles?.[0]);
            try {
