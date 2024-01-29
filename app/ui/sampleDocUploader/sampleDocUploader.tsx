@@ -13,11 +13,11 @@ const SampleDocUploader = ({
   setIsLoading:anyFunction;
 }) => {
   const sampleDataFetching = async () => {
-    setIsLoading(true);
     const responseFile = await fetch("/sample/sample.pdf");
     const blob = await responseFile.blob();
     const formData = new FormData();
     formData.append("file", blob, "sample.pdf");
+    setIsLoading(true);
     fetchSampleFileData(null, formData);
   };
 
