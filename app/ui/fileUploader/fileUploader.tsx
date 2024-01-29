@@ -32,7 +32,7 @@ const FileUploader = () => {
   const [data, setData] = useState(null);
   const [loading, setIsLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  const [error, setError] = useState<string | IContent>('');
+  const [error, setError] = useState<string>('');
   const toast = useToast();
 
   // Check if data is available after processing
@@ -67,18 +67,18 @@ const FileUploader = () => {
            try {
              setIsLoading(true);
              setData(null);
-             const response = await fetch("/api/processPdf", {
+             const res = await fetch("/api/processPdf", {
                method: "POST",
                body: sampleFormData || formData,
              });
-
-             if (!response.ok) {
+             const response = await res.json();
+             if (response?.error) {
                setIsLoading(false);
-               setError(errorContent);
+               setError(response.error || errorContent.title);
                return;
              }
-             const result = await response.json();
-             setData(result.data);
+             setData(response?.data);
+             setError('');
              setIsLoading(false);
            } catch (error) {
              setIsLoading(false);
@@ -96,7 +96,7 @@ const FileUploader = () => {
       fetchData(acceptedFiles.length > 0 ? acceptedFiles: fileRejections, null),
     noClick: true,
     noKeyboard: true,
-    maxSize: 250 * 1024,
+    // maxSize: 250 * 1024,
     accept: { "application/pdf": [".pdf"] },
   });
 
@@ -145,6 +145,7 @@ const FileUploader = () => {
               setError={() => {
                 setError('');
               }}
+              error={error}
             />
           )}
           {/* Loading spinner */}

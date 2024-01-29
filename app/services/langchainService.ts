@@ -15,12 +15,12 @@ async function extractInformation(
   questions: string[]
 ) {
 
-    const response = await chain.call({
+  
+    return chain.call({
           input_documents: [new Document({ pageContent: docs })],
           question: questions[0],
         })
 
-  return response.text.trim();
 }
 
 export default extractInformation;

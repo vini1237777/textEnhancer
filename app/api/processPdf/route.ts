@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 
 const question = [
-  `create a single object with relevant key value pair from the data, they key should not be more than two words and should have space between them inside the double quotes string and the value should be a string, not an object. Also keep general information like name, contact etc first. Result should not exceed 29,000 words including spaces`,
+  `create a single object with relevant key value pair from the data, they key should not be more than two words and should have space between them inside the double quotes string and the value should be a string, not an object. Also keep general information like name, contact etc first. Result should not exceed 8000 tokens to avoid errors like: "400 This model's maximum context length is 8192 tokens. However, your messages resulted in 9405 tokens. Please reduce the length of the messages." `,
 ];
 
 export async function POST(
@@ -28,13 +28,19 @@ export async function POST(
         const fullText = docs.map((doc) => doc.pageContent).join(" ");
         const questions: string[] = [...question]; 
         const extractedInfo = await extractInformation(fullText, questions);
-        const jsonPart = extractedInfo &&  extractedInfo.match(/{[^]*?}/g); 
-        const parsedJson= JSON.parse(extractedInfo);
-        return NextResponse.json(
-          { data: (jsonPart && parsedJson) || {} },
-          { status: 200 }
-        );
+        if (extractedInfo){
+          const jsonPart = extractedInfo?.text?.trim()?.match(/{[^]*?}/g) || '{}';
+          const parsedJson= JSON.parse(jsonPart);
+          return NextResponse.json(
+            {
+              data: parsedJson || {},
+            },
+            { status: 200 }
+          );
+        }
+        
       } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return NextResponse.json({ error: error?.error?.message || "Something Went Wrong!" , code: error?.error?.code }, { status: 500 });
       }
 }
+
