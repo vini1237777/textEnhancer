@@ -2,6 +2,7 @@ import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import extractInformation from "@/app/services/langchainService";
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
+import { IObject } from "@/app/lib/types";
 
 const question = [
   "Create a single object with relevant key-value pairs from the data. The key should be concise, not more than two words with space between them, and enclosed in double quotes. The value should be a brief string. Prioritize general information like name, contact, etc. Please provide a summarized response that fits within 8000 tokens to avoid errors related to maximum context length limits.",
@@ -27,10 +28,17 @@ export async function POST(
         const docs = await loader.load();
         const fullText = docs.map((doc) => doc.pageContent).join(" ");
         const questions: string[] = [...question]; 
-        const extractedInfo = await extractInformation(fullText, questions);
-        if (extractedInfo){
-          const jsonPart = extractedInfo?.text?.trim()?.match(/{[^]*?}/g) || '{}';
-          const parsedJson= JSON.parse(jsonPart);
+        const extractedInfo = await extractInformation(
+          fullText,
+          questions
+        ) as {text: string};
+        if (extractedInfo) {
+           if (extractedInfo?.text){
+
+           }
+          const textString = extractedInfo?.text || ''
+          const jsonPart = textString?.trim()?.match(/{[^]*?}/g) || "{}";
+          const parsedJson = JSON.parse(jsonPart as string);
           return NextResponse.json(
             {
               data: parsedJson || {},
@@ -38,9 +46,15 @@ export async function POST(
             { status: 200 }
           );
         }
+         return NextResponse.json(
+           {
+             error: "Something Went Wrong!",
+           },
+           { status: 500 }
+         );
         
       } catch (error: any) {
-        return NextResponse.json({ error: error?.error?.message || "Something Went Wrong!" , code: error?.error?.code }, { status: 500 });
+        return NextResponse.json({ error: error?.error?.message || error?.message || "Something Went Wrong!" , code: error?.error?.code }, { status: 500 });
       }
 }
 
