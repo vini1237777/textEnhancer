@@ -8,6 +8,8 @@ export const styles = {
     color: "white",
     mt: rem(70),
     bgColor: "#0c112e",
+    ml: rem(20),
+    mr: rem(10),
   },
   tableWrapper: {
     alignItems: "center",
@@ -16,10 +18,9 @@ export const styles = {
     borderRight: "1px solid",
     borderColor: "gray.300",
     fontSize: {
-      base: rem(15),
-      sm: rem(15),
-      md: rem(16),
-      lg: rem(15),
+      base: rem(13),
+      sm: rem(14),
+      md: rem(15),
     },
   },
 };

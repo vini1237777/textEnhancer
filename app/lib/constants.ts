@@ -103,3 +103,8 @@ export const featuresContent = [
 export const dialogTitle = "FEATURES";
 
 export const githubLink = "https://github.com/vini1237777/textEnhancer";
+
+export const nav = {
+  title: "TEXT EXTRACTOR",
+  item:'FEATURES'
+};

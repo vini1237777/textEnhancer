@@ -13,7 +13,6 @@ import {
 import { IObject } from "@/app/lib/types";
 import { dialogTitle, featuresContent } from "@/app/lib/constants";
 import { styles } from "./styles";
-import { rem } from "@/app/lib/functions";
 
 const FeaturesDialog = ({ isModalOpen, handleMenuClose }: IObject) => {
   const { isOpen,onClose } = useDisclosure({
@@ -28,11 +27,7 @@ const FeaturesDialog = ({ isModalOpen, handleMenuClose }: IObject) => {
         <ModalHeader sx={{ ...styles.title }}>{dialogTitle}</ModalHeader>
         <Box
           sx={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexWrap: "wrap",
+           ...styles.divider
           }}
         >
           <Divider />
@@ -40,12 +35,7 @@ const FeaturesDialog = ({ isModalOpen, handleMenuClose }: IObject) => {
         <ModalCloseButton sx={{ ...styles.title }} />
         <ModalBody
           sx={{
-            display: "flex",
-            alignItem: "center",
-            justifyContent: "flex-start",
-            gap: { base: "2rem", sm: "5rem", md: "3rem" },
-            flexWrap: "wrap",
-            pl: { base: rem(40) },
+           ...styles.modalBody
           }}
           alignContent="center"
         >
@@ -54,15 +44,7 @@ const FeaturesDialog = ({ isModalOpen, handleMenuClose }: IObject) => {
               key={feature.title}
               mb={3}
               sx={{
-                gap: rem(10),
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                width: { base: "100%", sm: "35%", md: "28%", lg: "45%" },
-                transition: "transform 0.3s",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                },
+                ...styles.features
               }}
             >
               <Text fontSize="lg" fontWeight="bold" sx={{ ...styles.title }}>

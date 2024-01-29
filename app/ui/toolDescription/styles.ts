@@ -13,6 +13,7 @@ export const styles = {
     mb: { base: rem(10), md: 0, lg: 0 },
     pl: { base: rem(20), sm: rem(90), md: rem(130) },
     pr: { base: rem(20), sm: rem(90), md: rem(130) },
+    mt:{md:rem(2), lg:rem(20)}
   },
   text: {
     ...commonStyles,

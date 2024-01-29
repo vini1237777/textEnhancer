@@ -7,7 +7,7 @@ import {
   Tooltip,
   Text,
 } from "@chakra-ui/react";
-import { githubLink } from "@/app/lib/constants";
+import { githubLink, nav } from "@/app/lib/constants";
 import FeaturesDialog from "./featuresDialog/featuresDialog";
 import { useState } from "react";
 import { styles } from "./styles";
@@ -21,12 +21,12 @@ export default function AppBar() {
   return (
     <>
       <Box padding="1rem" sx={{ ...styles.container }}>
-        <Text alignSelf={"center"} sx={{ ...styles.text }}>
-          TEXT EXTRACTOR
+        <Text alignSelf={"center"} sx={{ ...styles.text, fontWeight:'bold' }}>
+          {nav.title}
         </Text>
         <Box sx={{ ...styles.buttonWrapper }}>
           <Tooltip label="Project Features" hasArrow>
-            <Button onClick={handleFeaturesMenuOpen}>Features</Button>
+            <Button onClick={handleFeaturesMenuOpen}  sx={{ ...styles.text, color:'black' }}>{nav.item}</Button>
           </Tooltip>
 
           <Tooltip label="Github Code" hasArrow sx={{ ...styles.toolbar }}>

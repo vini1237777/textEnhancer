@@ -13,7 +13,7 @@ const ToolDescription = () => {
     >
       <Flex
         sx={{
-          gap: { sm: 1,base:1, md: 3 },
+          gap: { sm: 1, base: 1, md: 3 },
         }}
       >
         {Array.isArray(toolDescriptionContent.title) &&
@@ -47,7 +47,7 @@ const ToolDescription = () => {
             lg: rem(15),
           },
         }}
-        mb='4'
+        mb="4"
       >
         {toolDescriptionContent.description}
       </Text>
@@ -61,8 +61,8 @@ const ToolDescription = () => {
             md: rem(16),
             lg: rem(15),
           },
-          fontWeight:'bold',
-          textDecoration: 'underline'
+          fontWeight: "bold",
+          textDecoration: "underline",
         }}
       >
         {gptText}

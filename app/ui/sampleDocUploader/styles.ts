@@ -13,7 +13,7 @@ export const styles = {
     alignItems: "center",
     gap: "2",
     mt: { base: rem(10) },
-    bgColor: "#180c2e"
+    bgColor: "#180c2e",
   },
   text: {
     ...commonStyles,

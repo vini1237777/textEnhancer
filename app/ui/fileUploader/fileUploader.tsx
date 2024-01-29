@@ -67,7 +67,7 @@ const FileUploader = () => {
   });
 
   return (
-    <Box sx={styles.rootWrapper}>
+    < >
       <Box sx={styles.wrapper}>
         <Box {...getRootProps()} sx={{ ...styles.container }}>
           {/* Refresh icon to reset the data */}
@@ -91,11 +91,11 @@ const FileUploader = () => {
             <Text
               sx={{
                 ...styles.text,
+                padding: rem(10),
                 fontSize: {
-                  base: rem(15),
-                  sm: rem(15),
-                  md: rem(16),
-                  lg: rem(15),
+                  base: rem(13),
+                  sm: rem(14),
+                  md: rem(15),
                 },
               }}
             >
@@ -132,12 +132,6 @@ const FileUploader = () => {
                   ...styles.text,
                   color: "gray.300",
                   mb: rem(40),
-                  fontSize: {
-                    base: rem(15),
-                    sm: rem(15),
-                    md: rem(16),
-                    lg: rem(15),
-                  },
                 }}
               >
                 {!isdataAvailable && dagDropContent.description}
@@ -172,10 +166,10 @@ const FileUploader = () => {
         {showResult && isdataAvailable && <Result data={data || {}} />}
       </Box>
       {/* Component for uploading sample documents */}
-      {!loading && !isdataAvailable && (
+      {!loading && !isError && !isdataAvailable && (
         <SampleDocUploader fetchSampleFileData={fetchData} />
       )}
-    </Box>
+    </>
   );
 };
 

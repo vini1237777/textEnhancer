@@ -8,9 +8,11 @@ export const styles = {
     justifyContent: "space-between",
     width: "100%",
     borderBottom: "4px solid #231c46",
-    position: 'fixed',
+    position: "fixed",
     top: 0,
     zIndex: 4,
+    pl: rem(15),
+    pr: rem(15),
   },
   toolbar: {
     display: "flex",
@@ -18,7 +20,7 @@ export const styles = {
   },
   text: {
     color: "white",
-    fontWeight: "bold",
+    fontSize: { base: rem(15), sm: rem(15), md: rem(15) },
   },
   icon: {
     color: "white",

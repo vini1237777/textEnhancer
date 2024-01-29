@@ -19,7 +19,7 @@ const Result = ({data={}}) => {
  
   return (
     <TableContainer sx={{ ...styles.container }} data-testid="data-table">
-      <Table variant="simple">
+      <Table variant="simple" ml={0} size="md" mr={0}>
         <Thead sx={{ ...styles.tableWrapper }}>
           <Tr sx={{ ...styles.text }}>
             <Th color={"white"}>Header</Th>
