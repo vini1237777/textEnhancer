@@ -74,6 +74,7 @@ const FileUploader = () => {
              if (response?.error) {
                setIsLoading(false);
                setError(response.error);
+               return;
              }
              setData(response?.data);
              setError('');
