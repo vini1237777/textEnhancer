@@ -48,17 +48,15 @@ const Home = () => {
               sx={{ ...styles.iconButton }}
             />
           </Box>
-          <Box sx={{height:{base:'auto', sm:'100vh'}}}>
-            <iframe
-              src={frameUrl.link}
-              style={{
-                width: "100%",
-                height: "100%",
-                position: "fixed",
-                top: 40,
-              }}
-            />
-          </Box>
+          <iframe
+            src={frameUrl.link}
+            style={{
+              width: "100%",
+              height: "100vh",
+              position: "fixed",
+              top: 40,
+            }}
+          />
         </Box>
       )}
       {!frameUrl.isOpen && (
