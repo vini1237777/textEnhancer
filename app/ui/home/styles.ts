@@ -5,7 +5,7 @@ export const styles = {
     bgColor: "#180c2e",
     display: "flex",
     flexDirection: "column",
-    position: 'relative'
+    position: "relative",
   },
   description_uploader_wrapper: {
     mt: { base: rem(100), sm: rem(130), md: rem(100) },
@@ -13,6 +13,16 @@ export const styles = {
     flexDirection: "column",
     justifyContent: "space-between",
     position: "relative",
-    zIndex:1,
+    zIndex: 1,
+  },
+  iconButton: {
+    bgColor: "transparent",
+    color: "white",
+    _hover: {
+      bgColor: "transparent",
+      color: "white",
+      transform: 'scale(1.1)',
+      transition: 'transform 0.2s ease-in-out'
+    },
   },
 };

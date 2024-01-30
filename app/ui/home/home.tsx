@@ -1,6 +1,8 @@
+import { rem } from '@/app/lib/functions';
 import { IObject } from '@/app/lib/types';
-import { Box, Button } from '@chakra-ui/react';
+import { Box, IconButton } from '@chakra-ui/react';
 import React, { useState } from 'react'
+import { MdClose } from 'react-icons/md';
 import AppBar from '../appBar/appBar';
 import FileUploader from '../fileUploader/fileUploader';
 import ToolDescription from '../toolDescription/toolDescription';
@@ -25,17 +27,22 @@ const Home = () => {
   return (
     <Box sx={{ ...styles.container }}>
       {frameUrl.isOpen && (
-        <Box sx={{ width: "100%", bgColor: "#313638" }}>
+        <Box sx={{ bgColor: "#313638" }}>
           <Box
             sx={{
               width: "100%",
               display: "flex",
               justifyContent: "flex-end",
+              pr: rem(10),
+              pt: rem(5),
             }}
           >
-            <Button onClick={closeIframe} size={"md"}>
-              Close
-            </Button>
+            <IconButton
+              icon={<MdClose size={"30px"} />}
+              onClick={closeIframe}
+              aria-label="Close the pdf preview"
+              sx={{ ...styles.iconButton }}
+            />
           </Box>
           <iframe
             src={frameUrl.link}
@@ -48,7 +55,7 @@ const Home = () => {
           <AppBar />
           <Box sx={{ ...styles.description_uploader_wrapper }}>
             <ToolDescription />
-            <FileUploader setFrameUrl={setFrameUrl}  />
+            <FileUploader setFrameUrl={setFrameUrl} />
           </Box>
         </>
       )}
