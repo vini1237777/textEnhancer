@@ -29,14 +29,6 @@ const SampleDocUploader = ({ fetchSampleFileData, setFrameUrl }: IObject) => {
         link: URL.createObjectURL(fileBlob)
       }
       });
-
-      toast({
-        title: "PDF Loaded",
-        description: "Sample PDF has been loaded successfully.",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
     } catch (error: any) {
 
       toast({

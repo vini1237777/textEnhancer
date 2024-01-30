@@ -25,7 +25,12 @@ const Home = () => {
 
 
   return (
-    <Box sx={{ ...styles.container }}>
+    <Box
+      sx={{
+        ...styles.container,
+        bgColor: frameUrl.isOpen ? "#313638" : "#180c2e",
+      }}
+    >
       {frameUrl.isOpen && (
         <Box sx={{ bgColor: "#313638" }}>
           <Box
@@ -55,6 +60,7 @@ const Home = () => {
               height: "100vh",
               position: "fixed",
               top: 40,
+              overflow:'auto'
             }}
           />
         </Box>
