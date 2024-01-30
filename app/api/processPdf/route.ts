@@ -12,22 +12,28 @@ const question = [
 export async function POST(
   req: Request,
 ) {
-
-      try {
-        const filePath = pathModule.resolve("./", "sample_data.json");
+  
+  try {
+   
+         const formData = await req.formData();
+         const filePath = pathModule.resolve("./", "sample_data.json");
+    
+        if (formData?.get('isSampleFile') === 'true') {
+           
 
         if (fs.existsSync(filePath)) {
           // File exists, read and return the data
           const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
-           return NextResponse.json(
-             {
-               data: data || {},
-             },
-             { status: 200 }
-           );
+          return NextResponse.json(
+            {
+              data: data || {},
+            },
+            { status: 200 }
+          );
         }
 
-        const formData = await req.formData();
+        }
+
      
         const file: File | null = formData.get("file") as unknown as File;
         if (!file) {
@@ -55,7 +61,7 @@ export async function POST(
             const jsonPart = textString?.trim()?.match(/{[^]*?}/g) || "{}";
             const parsedJson = JSON.parse(jsonPart as string);
             
-            if (formData?.get('isSampleFile')) {
+            if (formData?.get('isSampleFile') === 'true') {
               await fs.writeFile(
                 filePath,
                 JSON.stringify(parsedJson),
