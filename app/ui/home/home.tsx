@@ -35,6 +35,10 @@ const Home = () => {
               justifyContent: "flex-end",
               pr: rem(10),
               pt: rem(5),
+              position: "fixed",
+              top: 0,
+              zIndex: 8,
+              bgColor: "#313638",
             }}
           >
             <IconButton
@@ -46,7 +50,12 @@ const Home = () => {
           </Box>
           <iframe
             src={frameUrl.link}
-            style={{ width: "100%", height: "100vh" }}
+            style={{
+              width: "100%",
+              height: "100vh",
+              position: "fixed",
+              top: 40,
+            }}
           />
         </Box>
       )}
