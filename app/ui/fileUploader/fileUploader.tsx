@@ -26,12 +26,13 @@ import {  IObject } from "@/app/lib/types";
 /**
  * FileUploader is a React component for uploading files, processing them, and displaying results.
  */
-const FileUploader = () => {
+const FileUploader = ({setFrameUrl}:IObject) => {
   // State for managing the uploaded data, loading status, result display, and error status.
   const [data, setData] = useState(null);
   const [loading, setIsLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [error, setError] = useState<string>('');
+
   const toast = useToast();
 
   // Check if data is available after processing
@@ -102,7 +103,7 @@ const FileUploader = () => {
 
 
   return (
-    < >
+    <>
       <Box sx={styles.wrapper}>
         <Box {...getRootProps()} sx={{ ...styles.container }}>
           {/* Refresh icon to reset the data */}
@@ -144,7 +145,7 @@ const FileUploader = () => {
           {error && (
             <Error
               setError={() => {
-                setError('');
+                setError("");
               }}
               error={error}
             />
@@ -203,7 +204,10 @@ const FileUploader = () => {
       </Box>
       {/* Component for uploading sample documents */}
       {!loading && !isdataAvailable && (
-        <SampleDocUploader fetchSampleFileData={fetchData} />
+        <SampleDocUploader
+          fetchSampleFileData={fetchData}
+          setFrameUrl={setFrameUrl}
+        />
       )}
     </>
   );
