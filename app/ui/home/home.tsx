@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <Box sx={{ ...styles.container }}>
       {frameUrl.isOpen && (
-        <Box sx={{ bgColor: "#313638" }}>
+        <Box sx={{ bgColor: "#313638", height:'100vh' }}>
           <Box
             sx={{
               width: "100%",
@@ -54,8 +54,8 @@ const Home = () => {
               width: "100%",
               position: "fixed",
               top: 40,
+              height:'100vh'
             }}
-            height="1300"
           />
         </Box>
       )}
