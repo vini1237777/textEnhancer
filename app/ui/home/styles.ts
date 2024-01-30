@@ -2,7 +2,7 @@ import { rem } from "@/app/lib/functions";
 
 export const styles = {
   container: {
-   
+    bgColor: "#180c2e",
     display: "flex",
     flexDirection: "column",
     position: "relative",

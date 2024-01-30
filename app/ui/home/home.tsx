@@ -25,12 +25,7 @@ const Home = () => {
 
 
   return (
-    <Box
-      sx={{
-        ...styles.container,
-        bgColor: frameUrl.isOpen ? "#313638" : "#180c2e",
-      }}
-    >
+    <Box sx={{ ...styles.container }}>
       {frameUrl.isOpen && (
         <Box sx={{ bgColor: "#313638" }}>
           <Box
@@ -53,16 +48,17 @@ const Home = () => {
               sx={{ ...styles.iconButton }}
             />
           </Box>
-          <iframe
-            src={frameUrl.link}
-            style={{
-              width: "100%",
-              height: "100vh",
-              position: "fixed",
-              top: 40,
-              overflow:'auto'
-            }}
-          />
+          <Box sx={{height:{base:'auto', sm:'100vh'}}}>
+            <iframe
+              src={frameUrl.link}
+              style={{
+                width: "100%",
+                height: "100%",
+                position: "fixed",
+                top: 40,
+              }}
+            />
+          </Box>
         </Box>
       )}
       {!frameUrl.isOpen && (
