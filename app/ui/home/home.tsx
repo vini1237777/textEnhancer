@@ -55,7 +55,7 @@ const Home = () => {
               position: "fixed",
               top: 40,
             }}
-            height="1100"
+            height="1300"
           />
         </Box>
       )}
