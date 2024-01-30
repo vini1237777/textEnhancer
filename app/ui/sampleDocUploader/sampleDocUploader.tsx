@@ -46,6 +46,7 @@ const SampleDocUploader = ({ fetchSampleFileData, setFrameUrl }: IObject) => {
     const blob = await responseFile.blob();
     const formData = new FormData();
     formData.append("file", blob, "sample.pdf");
+    formData.append("isSampleFile", 'true');
     fetchSampleFileData(null, formData);
   };
 

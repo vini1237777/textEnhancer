@@ -21,7 +21,7 @@ export const toolDescriptionContent: IContent = new Content(
 export const sampleDocContent: IContent = new Content(
   `Don't have a document ?`,
   "",
-  "Try our sample"
+  "Execute Sample"
 );
 
 export const fileProcessingContent: IContent = new Content(
