@@ -52,10 +52,10 @@ const Home = () => {
             src={frameUrl.link}
             style={{
               width: "100%",
-              height: "100vh",
               position: "fixed",
               top: 40,
             }}
+            height="1100"
           />
         </Box>
       )}
