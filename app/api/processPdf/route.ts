@@ -20,7 +20,6 @@ export async function POST(
     
         if (formData?.get('isSampleFile') === 'true') {
            
-
         if (fs.existsSync(filePath)) {
           // File exists, read and return the data
           const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -47,7 +46,6 @@ export async function POST(
         const path = `/tmp/${file.name}`;
         await writeFile(path, buffer);
         const loader = new PDFLoader(path, { parsedItemSeparator: "" });
-
         const docs = await loader.load();
         const fullText = docs.map((doc) => doc.pageContent).join(" ");
         const questions: string[] = [...question];
@@ -73,12 +71,22 @@ export async function POST(
               )
             }
 
-            return NextResponse.json(
-              {
-                data: parsedJson || {},
-              },
-              { status: 200 }
-            );
+            if (parsedJson){
+               return NextResponse.json(
+                 {
+                   data: parsedJson || {},
+                 },
+                 { status: 200 }
+               );
+            } else {
+               return NextResponse.json(
+                 {
+                   error: "Something Went Wrong!",
+                 },
+                 { status: 500 }
+               );
+            }
+            
           }
         }
         return NextResponse.json(
